@@ -1,1 +1,2 @@
 require("proto")
+require("cfg")

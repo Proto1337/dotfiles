@@ -1,3 +1,2 @@
-require("proto.remap")
-require("proto.set")
+require("proto.packer")
 vim.cmd[[colorscheme tokyonight]]
