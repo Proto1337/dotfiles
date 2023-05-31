@@ -14,15 +14,17 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-
 # Put your fun stuff here.
-
-# make doas work
+# doas
 complete -cf doas
-
-# Stylize
-PS1="\$ \W > "
-
+# Ranger
+RANGER_LOAD_DEFAULT_RC="False"
+# Wayland
+export MOZ_ENABLE_WAYLAND="1"
+export XDG_CURRENT_DESKTOP=sway
+export QT_QPA_PLATFORM="wayland-egl"
+# PATH
+PATH="${PATH}:/home/user/.local/bin:"
 # Aliases
 alias "sudo"="doas"
 alias "vim"="nvim"
@@ -30,28 +32,32 @@ alias "vi"="nvim"
 alias "nvp"="nvimpager"
 alias "ll"="ls -l"
 alias "la"="ls -la"
-
-# Binds
-# Auto-Completion
-# Cycle with TAB through suggests.
+#Binds
+#Auto-Completion
+#Cycle with TAB through suggests.
 bind 'TAB:menu-complete'
-# Shift-Tab to cycle backwards
-bind '"\e[Z": menu-complete-backward'
-
-# Display a list of matches
+#⋅Shift-Tab⋅to⋅cycle⋅backwards
+bind '"\e[Z":menu-complete-backward'
+#⋅Display⋅a⋅list⋅of⋅matches
 bind "set show-all-if-ambiguous on"
-
-# 1st TAB: List
-# 2nd TAB: Cycle
+#⋅2st⋅TAB:⋅List
+#⋅2nd⋅TAB:⋅Cycle
 bind "set menu-complete-display-prefix on"
-
-# Cycle back based on current typed command
+#⋅Cycle⋅back⋅based⋅on⋅current⋅typed⋅command
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
-
 bind '"\e[1;5C":forward-word'
 bind '"\e[1;5D":backward-word'
-
-# starship
+#⋅starship
 eval "$(starship init bash)"
-
+# starting sway
+if test -z "${XDG_RUNTIME_DIR}"; then
+        export XDG_RUNTIME_DIR=/tmp/${UID}-runtime-dir
+        if ! test -d "${XDG_RUNTIME_DIR}"; then
+                mkdir "${XDG_RUNTIME_DIR}"
+                chmod 0700 "${XDG_RUNTIME_DIR}"
+        fi
+fi
+if [ "$(tty)" = "/dev/tty1" ]; then
+	exec dbus-run-session sway
+fi
