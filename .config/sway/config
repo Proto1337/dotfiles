@@ -1,3 +1,5 @@
+exec --no-startup-id dbus-update-activation-environment --all
+# reset dbus env
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -18,7 +20,6 @@ set $term alacritty
 set $menu wofi --show drun
 
 # pipewire
-exec dbus-launch gentoo-pipewire-launcher &
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
@@ -45,7 +46,7 @@ bindsym $ps3 exec grim $psf
 bindsym $ps4 exec grim -g "$(slurp)" $psf
 
 ### Output configuration
-output * bg /home/user/Pictures/bg_gentoo_bats.png fill
+# output * bg /home/user/Pictures/bg_gentoo_bats.png fill
 #
 # Example configuration:
 #
