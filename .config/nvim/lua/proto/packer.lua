@@ -13,6 +13,12 @@ return require('packer').startup(function(use)
     use('tpope/vim-fugitive')
     use('nvim-tree/nvim-tree.lua')
     use('nvim-tree/nvim-web-devicons')
+    use('lewis6991/gitsigns.nvim')
+    use('romgrk/barbar.nvim')
+    use({
+        'iamcco/markdown-preview.nvim',
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',

@@ -1,2 +1,0 @@
-require("proto")
-require("cfg")
